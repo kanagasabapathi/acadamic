@@ -1,19 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
 
-main()
+
+int
+main(int argc, char **argv)
 {
-  FILE *fptr;
-  char line[130]; /* line from unix command*/
+    pid_t pid = getpid();
 
-  fptr = popen("ps","r"); /* Issue the ls command. */
+    fprintf(stdout, "Path to current process: '/proc/%d/'\n", (int)pid);
 
-/* Read a line */
-  while ( fgets( line, sizeof line, fptr))
-  {
-    printf("%s", line);
-
- /* or process the 'line' as needed */
-  }
-  pclose(fptr);
+    return EXIT_SUCCESS;
 }
-
